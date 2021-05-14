@@ -9,7 +9,7 @@ var port = process.env.port || 8000
 
 // Config DB and schema
 var User = require('./models/user')
-var db_connection = require('./db') 
+var db_connection = require('./config/db') 
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -81,9 +81,9 @@ app.post('/delete', (req, res) => {
 
   const filter = { username: username };
 
-  User.deleteOne(filter, function (err) {
-    if(err) console.log(err);
-    console.log("Successful deletion");
+  User.findOneAndDelete(filter, (err) => {
+    if(err) res.json(err);
+    res.end("Successful deletion");
   });
 })
 
