@@ -37,6 +37,7 @@ app.get('/index', (req, res) => {
     
 })
 
+// This route is just for testing out if the db is connected probally
 app.get('/test', (req, res) => {
     Profile.find({}, (err, data) => {
         if(err){
