@@ -1,49 +1,83 @@
 ////////////////////////////// Entry point setup///////////////////////
 var express = require('express')
-//var mongoose = require('mongoose')
-var session = require("express-session")
+var session = require('express-session')
+var bodyParser = require('body-parser')
 
-var app = express();
+
+app = express()
 
 // Set up port
-var PORT = process.env.PORT || 8080
+var port = process.env.port || 3000
 
-// // Config DB and schema
-// var User = require('./models/user_student')
-// var Profile = require('./models/profile')
-// var db_connection = require('./config/db') 
-
-//////////////////////////// VIEW ENGINE SETUP //////////////////////////
+////////////////////////////// VIEW ENGINE ///////////////////////////////
 app.set('view engine', 'ejs')
-app.use(express.static("views"))
-app.set("trust proxy", 1)
+app.use(express.static('views'))
+app.use(bodyParser.urlencoded({extended: true}))
 
-//////////////////////////// ROUTES SETUP ////////////////////////////////
-var login = require('./functions/loginVerify')
+//////////////////////////////Express-Session config//////////////////////
+app.use(session({
+
+	// It holds the secret key for session
+	secret: 'Your_Secret_Key',
+
+	// Forces the session to be saved
+	// back to the session store
+	resave: true, //false
+
+	// Forces a session that is "uninitialized"
+	// to be saved to the store
+	saveUninitialized: true
+}))
+
+
+//////////////////////////////Routes definition//////////////////////
+var login = require('./controller/loginValidator')
 
 app.get('/', (req, res) => {
-	res.redirect('/login')
+    res.redirect('/index')
+  })
+  
+app.get('/login', (req, res) => {   
+    // Check if there is session or not
+    if(req.session.username){
+        res.redirect('/index')
+    }
+    else{
+        res.render('login')
+    }
+
 })
 
-/**
- * Everything will be rendered on 1 same main page.
- * There are 2 types of user here: 1 - casual user, 2 - VIP user
- */
-app.get('/login', (req, res) => {
-	if(req.session){
-		return res.render('login')
-	}
-	res.redirect('/index')
+app.post('/login', (req, res) => {   
+    /**
+     * For this simple authorization, we just have 2 roles, 1 - casual user, 2 - VIP
+     * We block 
+     */
+    var user = req.session
+    var account = req.body
+
+    console.log(account)
+    
+    if(account.username == 'vip'){
+        user.username = 2
+        return res.redirect('/index')
+    }
+    user.username = 1
+    res.redirect('/index')
 })
 
-app.get('/index', (req, res) => {
-	if(req.session){
-		return res.render('main')
-	}
-	res.redirect('/login')
+app.get('/index', (req, res) => {   
+    login.routeJump(req, res, 'main', '/login')
 })
 
-/////////////////////////// SEVER LISTENER ///////////////////////////
-var server = app.listen(PORT, () =>{
-    console.log("The server is now running at http://localhost:" + PORT);
+app.get('/logout', (req, res) => {   
+    req.session.destroy()
+
+    res.redirect('/login')
 })
+
+
+//////////////////////////// SERVER LISTENER ////////////////////////////\
+var server = app.listen(port, () =>{
+    console.log("The server is now running at http://localhost:" + port);
+})	
