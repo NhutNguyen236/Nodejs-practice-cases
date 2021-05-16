@@ -17,15 +17,15 @@
 </head>
 
 <body>
-  <% if(userSession == 2){ %>
+  <% if(locals.user == 2){ %>
     <a href="#"><img style="display: block; margin: 0 auto; margin-top: 20%;"src="https://cdn.tgdd.vn/hoi-dap/1344460/Thumbnail/vip-la-gi-viet-tat-cua-tu-nao-dac-quyen-cua-vi-p-la-gi-thumb.png" alt="Colorlib logo"></a>
   <% } %>
-  <% if(userSession == 1){ %>
+  <% if(locals.user == 1){ %>
     <a href="#"><img style="display: block; margin: 0 auto; margin-top: 20%;"src="https://img.icons8.com/bubbles/2x/user-male.png" alt="Colorlib logo"></a>
   <% } %>
-  <h1 style="text-align:center;">Thank you for using our template!</h1>
+  <h1 style="text-align:center;">Welcome <%= quote%></h1>
   <p style="text-align:center;">For more
-  <div>
+  <div style="text-align:center;">
       <a href="/logout" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-log-out"></span> Log out
       </a>
