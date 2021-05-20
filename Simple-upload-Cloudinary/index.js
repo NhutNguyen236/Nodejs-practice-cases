@@ -39,6 +39,7 @@ app.use(session({
 
 /////////////////////////////////////// CLOUDINARY CONFIG ////////////////////////////
 // I still dont have public_id on Cloudinary for each uploaded image
+// I will take it here: https://dev.to/ebereplenty/image-upload-to-cloudinary-with-nodejs-and-dotenv-4fen
 const cloudinary = require('cloudinary').v2;
 
 // You can find the tut here: https://www.freecodecamp.org/news/how-to-allow-users-to-upload-images-with-node-express-mongoose-and-cloudinary-84cefbdff1d9/
