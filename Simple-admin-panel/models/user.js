@@ -12,7 +12,7 @@ userSchema = new Schema( {
 	username: String,
 	password: String,
 	role: Number
-}, {collection: 'user'}),
+}, {collection: 'user'}, { typeKey: '$type' }),
 
 // model is very important, point to the right database(model) name to get access correctly
 User = mongoose.model('User123', userSchema)

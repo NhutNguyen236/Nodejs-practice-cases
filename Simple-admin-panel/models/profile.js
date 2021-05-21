@@ -8,7 +8,7 @@ profileSchema = new Schema( {
     class: String,
     dean: String,
     imageurl: String
-}, {collection: 'user-profiles'}),
+}, {collection: 'user-profiles'}, { typeKey: '$type' }),
 
 // model is very important, point to the right database(model) name to get access correctly
 Profile = mongoose.model('Profile', profileSchema)
