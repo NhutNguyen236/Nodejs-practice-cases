@@ -237,13 +237,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
-                                        </tr>
+                                        <% locals.data_pass.forEach(function(data) { %>
+                                            <tr>
+                                                <td></td>
+                                                <td><%= data._id%></td>
+                                                <td><%= data.displayname%></td>
+                                                <td><%= data.username%></td>
+                                                <td><%= data.password%></td>
+                                            </tr>
+                                        <% }) %>
                                         
                                     </tbody>
                                 </table>

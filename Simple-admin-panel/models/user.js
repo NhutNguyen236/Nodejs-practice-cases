@@ -11,7 +11,8 @@ userSchema = new Schema( {
 	email: String,
 	username: String,
 	password: String,
-	role: Number
+	role: Number,
+	displayname: String
 }, {collection: 'user'}, { typeKey: '$type' }),
 
 // model is very important, point to the right database(model) name to get access correctly

@@ -59,16 +59,44 @@ app.get('/admin' , (req , res)=>{
 
 // Add Dean page
 app.get('/addDean' , (req , res)=>{
+
+    var data_p = []
     // Write code to check session role = 2 - admin or not
-    User.find({role: 1})
+    User.find({role: 1}) // async call
     .then(function (data) {
+        // Collection id out from data
+        var ids = []
+
+        for(i = 0; i < data.length; i++){
+            ids.push(data[i]._id)
+        }
+
+        // Look and bind displaynames to data_pass
         var data_pass = data
 
-        Profile.find({}).then(function(profile) {
-            console.log(data)
-            console.log(profile)
-            //console.log(profile)
+        //  async function findProfilebyID(id){
+        //     var query = await Profile.findOne({deanID: id})
+        //     return query
+        // }
+
+        // for(i = 0; i < data.length; i++){
+        //     var query = findProfilebyID(data[i]._id)
+
+        //     query.then(function(result){
+        //         displayname.push(result.displayname)
+        //         console.log(displayname)
+        //     })
+        // }
+
+        Profile.find({deanID: ids}).then(function(profile){
+            for(i = 0; i < profile.length; i++){
+                // Gotta have to define a new field in UserSchema in user model
+                data_pass[i].displayname = profile[i].displayname
+            }
+
+            res.render('addDean', {data_pass})
         })
+        
     });
     // User.find({role: 1}, (err, data) => {
     //     if(err) console.log(err)
@@ -78,7 +106,6 @@ app.get('/addDean' , (req , res)=>{
     // })
     // Always render page even if there is no data
     //res.render('addDean', {data})
-    res.render('addDean')
 })
 
 app.post('/addDean' , (req , res)=>{
