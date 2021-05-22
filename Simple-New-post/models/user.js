@@ -12,7 +12,7 @@ userSchema = new Schema( {
 	username: String,
 	password: String,
 	role: Number,
-	// For posts
+	// posts' ids 
 	posts: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
