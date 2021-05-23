@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX File Uploads With Cloudinary</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.js' type='text/javascript'></script>
+    <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+</head>
+<body>
+    <form id="file-form" method="post" enctype="multipart/form-data">
+        Upload a File:
+        <input type="file" id="myfile" name="myfile">
+        <input type="submit" id="submit" name="submit" value="Upload File Now" >
+    </form>
+    <p id="status"></p>
+    <script type="text/javascript" src="fileUpload.js"></script>
+</body>
+
+</html>

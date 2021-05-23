@@ -17,6 +17,11 @@
 <link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/responsive.css">
+<!-- Nhut added jquery and js -->
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.js' type='text/javascript'></script>
+<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+<script src="post_ajax.js"></script>
 </head>
 
 
@@ -63,7 +68,7 @@
                                                             <div class="usy-dt">
                                                                 <img src="http://via.placeholder.com/50x50" alt="">
                                                                 <div class="usy-name">
-                                                                    <h3>John Doe</h3>
+                                                                    <h3><%= locals.req.session.username%></h3>
                                                                     <span><img src="images/clock.png" alt="">3 min ago</span>
                                                                 </div>
                                                             </div>
@@ -71,10 +76,7 @@
                                                                 <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
                                                                 <ul class="ed-options">
                                                                     <li><a href="#" title="">Edit Post</a></li>
-                                                                    <li><a href="#" title="">Unsaved</a></li>
-                                                                    <li><a href="#" title="">Unbid</a></li>
-                                                                    <li><a href="#" title="">Close</a></li>
-                                                                    <li><a href="#" title="">Hide</a></li>
+                                                                    <li><a href="#" title="">Delete Post</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -86,7 +88,7 @@
                                                                 <!-- This is for View more function -->
                                                                 <!-- <a href="#" title="">view more</a> -->
                                                             </p>
-                                                            <img src=<%= row.img %> alt="">
+                                                            <img <% if(row.img == null){ %>style="display: none;"<% } %> src=<%= row.img %> alt="">
                                                         
                                                             <iframe width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
                                                             </iframe>
@@ -161,30 +163,30 @@
 			<div class="post-project">
 				<h3>Write your post 😇</h3>
 				<div class="post-project-fields">
-					<form method="POST">
+					<form id="postForm" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
+								<input id="titleInput" type="text" name="title" placeholder="Title">
 							</div>
 							
 							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
+								<textarea id="descInput" name="description" placeholder="Description"></textarea>
 							</div>
 
                             <!-- For image upload -->
                             <div class="col-lg-12">
-							    <input type="file" id="img" name="img"  accept="image/* placeholder="Select an image for your post here">
+							    <input type="file" id="img" name="postImage" accept="image/*">
 							</div>
 
                             <div class="col-lg-12">
-                                <input type="url" name="url_video" id="url"
+                                <input id="urlInput" type="url" name="url_video" id="url"
                                 placeholder="https://www.youtube.com/"
                                 pattern="https://www.youtube.com/.*" size="30">
                             </div>
                             
 							<div class="col-lg-12">
 								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
+									<li><button id="postButton" class="submit" type="submit" value="post">Post</button></li>
 								</ul>
 							</div>
 						</div>

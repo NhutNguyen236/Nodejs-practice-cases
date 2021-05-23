@@ -99,7 +99,20 @@ app.post('/login' , (req , res)=>{
 app.get('/index' , (req , res)=>{
     // Check if session is set
     if(req.session.username){
-        res.render('main/index', {record: []})
+        //Get record of post from username
+        User.findOne({username: req.session.username}).then(function(data){
+            // Binds posts ids from User to an array
+            var postIds = []
+            postIds = data.posts
+            
+            // Initialize record of posts
+            var record = []
+            Post.find({_id: postIds}).then(function(posts){
+                record = posts
+                res.render('main/index', {record: record, req})
+            })
+        })
+        
     }
     else{
         res.redirect('/login')
@@ -109,9 +122,8 @@ app.get('/index' , (req , res)=>{
 
 app.post('/index' , (req , res)=>{
     // Get post body
-    var postBody = req.body
-
     
+
 
 })
 
