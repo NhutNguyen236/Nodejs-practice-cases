@@ -107,6 +107,14 @@ app.get('/index' , (req , res)=>{
 
 })
 
+app.post('/index' , (req , res)=>{
+    // Get post body
+    var postBody = req.body
+
+    
+
+})
+
 app.get('/error' , (req , res)=>{
 
     res.render('error/error')
