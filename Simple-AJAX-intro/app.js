@@ -11,18 +11,32 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
-app.get('/searching', function(req, res){
-    var val = req.query.search;
-    console.log(val);
+// this is for page with button
+app.get('/index', (req, res) => {
+    var data = "Hello"
+    res.render('index2')
+})
 
-    var craig = ''
+app.get('/searching', function(req, res){
+    var val = undefined
+    val = req.query.search;
+    // This will get a bit confused but here, I will tell you why
+    // Cause I make 2 different routes for 2 different ways to submit data so I gotta catch em all
+    if(val == undefined){
+        val = req.query.parameters.search
+    }
+    
+    console.log(val);
 
     // Yahoo Query API has been shut down long ago so I turn it into Google one
     var url = "https://www.google.com/search?q=" + val + "&aqs=chrome..69i57j35i39l2j0i433l2j69i60l3.1126j0j4&sourceid=chrome&ie=UTF-8";
     console.log(url);
+
     var hello = '<a href ="'+url+'">'+url+'</a>'
     res.send(hello)
 
+
+    // This request thing needs further research
     // // request module is used to process the yql url and return the results in JSON format
     // request(url, function(err, resp, body) {
     //     body = JSON.parse(body);
