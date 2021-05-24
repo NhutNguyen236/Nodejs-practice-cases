@@ -19,9 +19,11 @@ function doAjax() {
         processData: false, //prevent jQuery from automatically transforming the data into a query string
         contentType: false,
         cache: false,
-        success: (data) => {
-            $("#confirmMsg").text(data);
-			
+        success: (data) => {      
+            $('#fnResult').text(data.firstname)
+            $('#lnResult').text(data.lastname)
+            // You can inject html tag here too
+            $('#imgPlace').html('<img src="'+data.file.path+'" alt="">')
 			//reset form
 			
         },

@@ -49,10 +49,12 @@ app.post('/upload', upload.single("resume"), (req, res) => {
 		file: req.file
 	};
 	
+    console.log(applicationform)
 	// log applicationForm
-	console.log(JSON.stringify(applicationform, null, 4));
+	// console.log(JSON.stringify(applicationform, null, 4));
 	
-	res.send('Uploaded Successfully!');
+    // Send data back to AJAX 
+	res.send(applicationform);
 });
 
 app.listen(3000,function(){
