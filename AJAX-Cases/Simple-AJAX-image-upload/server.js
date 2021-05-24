@@ -1,6 +1,10 @@
 var express =   require("express");
 var multer  =   require('multer');
 var app     =   express();
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 var storage =   multer.diskStorage({
   destination: function (req, file, callback) {
@@ -27,5 +31,5 @@ app.post('/api/photo',function(req,res){
 });
 
 app.listen(3000,function(){
-    console.log("Working on port 3000");
+    console.log("http://localhost:3000");
 });

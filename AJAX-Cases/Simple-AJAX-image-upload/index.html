@@ -7,9 +7,10 @@
          enctype="multipart/form-data"
          action="/api/photo"
          method="post">
-      <input type="file" name="userPhoto" />
-      <input type="submit" value="Upload Image" name="submit">
-      <span id = "status"></span>
+        <input type="text" name="imageName" placeholder="Enter your image name here">
+        <input type="file" name="userPhoto" />
+        <input type="submit" value="Upload Image" name="submit">
+        <span id = "status"></span>
     </form>
   </body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -29,10 +30,10 @@
                     $("#status").empty().text(response);
                     console.log(response);
                 }
-        });
+            });
         //Very important line, it disable the page refresh.
         return false;
-    });    
+        });    
   });
   </script>
 </html>
