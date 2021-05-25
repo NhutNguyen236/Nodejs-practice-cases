@@ -114,7 +114,7 @@ app.get('/index' , (req , res)=>{
             
             // Initialize record of posts
             var record = []
-            Post.find({_id: postIds}).then(function(posts){
+            Post.find({_id: postIds}).sort({createdAt:-1}).then(function(posts){
                 record = posts
                 res.render('main/index', {record: record, req})
             })

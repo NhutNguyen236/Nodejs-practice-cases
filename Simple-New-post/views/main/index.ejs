@@ -57,7 +57,10 @@
 										</div><!--post-st end-->
 									</div><!--post-topbar end-->
                                     <div class="post-area">
-                                        <!-- Place to see your post -->
+                                    <!-- Place to see your post -->
+                                    <!-- Placeholder for new post -->
+                                    <div id="newPost" class="posts-section">
+                                    </div>
                                     <%if (locals.record.length >0){ %>
                                         <% record.forEach(function(row){ %>
                                             <div id="posts-section" class="posts-section">
@@ -69,7 +72,7 @@
                                                                 <img src="http://via.placeholder.com/50x50" alt="">
                                                                 <div class="usy-name">
                                                                     <h3><%= locals.req.session.username%></h3>
-                                                                    <span><img src="images/clock.png" alt="">3 min ago</span>
+                                                                    <span><img src="images/clock.png" alt=""><%= row.createdAt%></span>
                                                                 </div>
                                                             </div>
                                                             <div class="ed-opts">
@@ -147,10 +150,6 @@
                                             </div><!--posts-section end-->
                                         <% }) %>
                                     <% } %>
-                                    <!-- Placeholder for new post -->
-                                    <div id="newPost" class="posts-section">
-
-                                    </div>
                                     </div>
                                     
 								</div><!--main-ws-sec end-->
