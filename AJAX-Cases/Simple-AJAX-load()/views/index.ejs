@@ -13,6 +13,7 @@ $(document).ready(function(){
   });
 
   $("#button3").click(function(){
+    // $(String_type) so you really can perform anything that is String related
     $("#div1").load("ajax_load/demo_text.html", function(){
         $('h2').text('See... it will not reload the page')
         $('p').css("display", "none")

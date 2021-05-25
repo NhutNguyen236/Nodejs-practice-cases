@@ -20,7 +20,7 @@ function doAjax() {
         contentType: false,
         cache: false,
         success: (data) => {      
-            $('#posts-section').load("../load_ajax/post.html",{})
+            
         },
         error: (e) => {
             $("#confirmMsg").text(e.responseText);

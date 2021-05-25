@@ -31,6 +31,8 @@ app.use(express.static('views'))
 app.use(express.static('views/error'))
 // views for main page
 app.use(express.static('views/main'))
+// Views for AJAX page load
+app.use(express.static('views/load_ajax'))
 
 ///////////////////////////// Cloudinary CONFIG ///////////////////////
 cloudinary.config({

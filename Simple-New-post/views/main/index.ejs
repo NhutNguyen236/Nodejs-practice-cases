@@ -68,7 +68,7 @@
                                                             <div class="usy-dt">
                                                                 <img src="http://via.placeholder.com/50x50" alt="">
                                                                 <div class="usy-name">
-                                                                    <h3 id="usernameHolder"><%= locals.req.session.username%></h3>
+                                                                    <h3><%= locals.req.session.username%></h3>
                                                                     <span><img src="images/clock.png" alt="">3 min ago</span>
                                                                 </div>
                                                             </div>
@@ -82,15 +82,15 @@
                                                         </div>
                                                         
                                                         <div class="job_descp">
-                                                            <h3 id="postTitle"><%= row.title %></h3>
-                                                            <p id="postDesc">
+                                                            <h3><%= row.title %></h3>
+                                                            <p>
                                                                 <%= row.description %>
                                                                 <!-- This is for View more function -->
                                                                 <!-- <a href="#" title="">view more</a> -->
                                                             </p>
-                                                            <img id="postImage" <% if(row.img == null){ %>style="display: none;"<% } %> src=<%= row.img %> alt="">
+                                                            <img <% if(row.img == null){ %>style="display: none;"<% } %> src=<%= row.img %> alt="">
                                                         
-                                                            <iframe id="postVideo" width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
+                                                            <iframe width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
                                                             </iframe>
                                                             
                                                         </div>
@@ -147,6 +147,10 @@
                                             </div><!--posts-section end-->
                                         <% }) %>
                                     <% } %>
+                                    <!-- Placeholder for new post -->
+                                    <div id="newPost" class="posts-section">
+
+                                    </div>
                                     </div>
                                     
 								</div><!--main-ws-sec end-->
