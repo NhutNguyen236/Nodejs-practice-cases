@@ -5,8 +5,6 @@ function ybgetID(url) {
 
     if (match && match[2].length == 11) {
         return match[2];
-    } else {
-        return 'dQw4w9WgXcQ';
     }
 }
 

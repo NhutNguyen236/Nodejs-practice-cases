@@ -90,7 +90,7 @@
                                                             </p>
                                                             <img <% if(row.img == null){ %>style="display: none;"<% } %> src=<%= row.img %> alt="">
                                                         
-                                                            <iframe width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
+                                                            <iframe <% if(row.url_video == null){ %>style="display: none;"<% } %> width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
                                                             </iframe>
                                                             
                                                         </div>

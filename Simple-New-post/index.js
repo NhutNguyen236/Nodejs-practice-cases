@@ -138,11 +138,17 @@ app.post('/index', upload.single("postImage"), (req , res)=>{
 		img: req.file
 	};
 
+    var new_post = undefined
     // Handler for undefined field
     Object.keys(postData).forEach(key => postData[key] === undefined ? delete postData[key] : {});
-    
+    // Obj filter
+    if(postData.img !== undefined){
+        new_post = new Post({title: postData.title, description: postData.description, img: postData.img.path})
+    }
+    else{
+        new_post = new Post(postData)
+    }
     // Write above thing to Post
-    var new_post = new Post(postData)
     new_post.save()
 
     // Input the created post IDs to User posts collection

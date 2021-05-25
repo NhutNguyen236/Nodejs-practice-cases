@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+mongoose.set('useFindAndModify', false);
 //var url = 'mongodb://localhost:27017/Profile'
 var url = 'mongodb+srv://Phong:pjOAkDdSoSiXZ3x2@cluster0.ndps2.mongodb.net/Test?retryWrites=true&w=majority'
 var db = mongoose.connect(url, {
