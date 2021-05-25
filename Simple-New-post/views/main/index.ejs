@@ -60,7 +60,7 @@
                                         <!-- Place to see your post -->
                                     <%if (locals.record.length >0){ %>
                                         <% record.forEach(function(row){ %>
-                                            <div class="posts-section">
+                                            <div id="posts-section" class="posts-section">
                                                 
                                                 <div class="posty">
                                                     <div class="post-bar no-margin">
@@ -68,7 +68,7 @@
                                                             <div class="usy-dt">
                                                                 <img src="http://via.placeholder.com/50x50" alt="">
                                                                 <div class="usy-name">
-                                                                    <h3><%= locals.req.session.username%></h3>
+                                                                    <h3 id="usernameHolder"><%= locals.req.session.username%></h3>
                                                                     <span><img src="images/clock.png" alt="">3 min ago</span>
                                                                 </div>
                                                             </div>
@@ -82,15 +82,15 @@
                                                         </div>
                                                         
                                                         <div class="job_descp">
-                                                            <h3><%= row.title %></h3>
-                                                            <p>
+                                                            <h3 id="postTitle"><%= row.title %></h3>
+                                                            <p id="postDesc">
                                                                 <%= row.description %>
                                                                 <!-- This is for View more function -->
                                                                 <!-- <a href="#" title="">view more</a> -->
                                                             </p>
-                                                            <img <% if(row.img == null){ %>style="display: none;"<% } %> src=<%= row.img %> alt="">
+                                                            <img id="postImage" <% if(row.img == null){ %>style="display: none;"<% } %> src=<%= row.img %> alt="">
                                                         
-                                                            <iframe width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
+                                                            <iframe id="postVideo" width="500" height="300" src="https://www.youtube.com/embed/<%= row.url_video %>  " frameborder="0">
                                                             </iframe>
                                                             
                                                         </div>
@@ -138,12 +138,12 @@
                                                     </div><!--comment-section end-->
                                                 </div><!--posty end-->
                                                 <div class="process-comm">
-                                                    <div class="spinner">
+                                                    <!-- <div class="spinner">
                                                         <div class="bounce1"></div>
                                                         <div class="bounce2"></div>
                                                         <div class="bounce3"></div>
-                                                    </div>
-                                                </div><!--process-comm end-->
+                                                    </div> -->
+                                                </div>
                                             </div><!--posts-section end-->
                                         <% }) %>
                                     <% } %>
@@ -166,11 +166,11 @@
 					<form id="postForm" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-lg-12">
-								<input id="titleInput" type="text" name="title" placeholder="Title">
+								<input id="titleInput" type="text" name="title" placeholder="Title" required>
 							</div>
 							
 							<div class="col-lg-12">
-								<textarea id="descInput" name="description" placeholder="Description"></textarea>
+								<textarea id="descInput" name="description" placeholder="Description" required></textarea>
 							</div>
 
                             <!-- For image upload -->

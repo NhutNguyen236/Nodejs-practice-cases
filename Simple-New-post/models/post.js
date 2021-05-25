@@ -7,7 +7,7 @@ postSchema = new Schema( {
     img:String,
     url_video:String,
     
-}, {collection: 'post'}),
+}, {collection: 'post'}, {timestamps: true}),
 
 // model is very important, point to the right database(model) name to get access correctly
 Post = mongoose.model('Posts', postSchema)

@@ -15,7 +15,7 @@ userSchema = new Schema( {
 	// posts' ids 
 	posts: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
+			type: String,
 		}
 	]
 }, {collection: 'users'}),

@@ -1,5 +1,5 @@
 // This function will help get ID from youtube links
-function getId(url) {
+function ybgetID(url) {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
 
@@ -9,3 +9,5 @@ function getId(url) {
         return 'dQw4w9WgXcQ';
     }
 }
+
+module.exports.ybgetID = ybgetID

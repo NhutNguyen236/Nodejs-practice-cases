@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#button1").click(function(){
+    $("#div1").load("ajax_load/demo_text.html");
+  });
+
+  $("#button2").click(function(){
+    $("#div1").load("ajax_load/demo_text.html h2");
+  });
+
+  $("#button3").click(function(){
+    $("#div1").load("ajax_load/demo_text.html", function(){
+        $('h2').text('See... it will not reload the page')
+        $('p').css("display", "none")
+    });
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button id="button1">Get Full external document</button>
+
+<button id="button2">Get just a fragment</button>
+
+<button id="button3">Change contents from external document</button>
+
+<div style="margin-top: 50px;">
+    This is the content of demo_text
+    <h2>jQuery and AJAX is FUN!!!</h2>
+    <p>This is some text in a paragraph.</p>
+</div>
+
+
+</body>
+</html>

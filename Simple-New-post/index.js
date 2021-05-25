@@ -40,16 +40,21 @@ cloudinary.config({
 })
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'PostImage',
-    format: async (req, file) => 'png, jpg', // supports promises as well
-    public_id: (req, file) => 'computed-filename-using-request',
-  },
-});
+    cloudinary: cloudinary,
+    params: {
+        folder: "PostImage",
+        allowedFormats: ["jpg", "png"],
+        transformation: [{
+            width: 500,
+            height: 500,
+            crop: "limit"
+        }]
+    }
+})
 
 
-const parser = multer({ storage: storage });
+
+const upload = multer({ storage: storage });
 //////////////////////////////// Middlewares config //////////////////////////
 require('./config/db')
 var User = require('./models/user')
@@ -120,11 +125,31 @@ app.get('/index' , (req , res)=>{
 
 })
 
-app.post('/index' , (req , res)=>{
+// Call Youtube video IDs getter
+var idGetter = require('./functions/youtubeID')
+app.post('/index', upload.single("postImage"), (req , res)=>{
     // Get post body
+    var postData = {
+		title: req.body.title,
+		description: req.body.description,
+        url_video: idGetter.ybgetID(req.body.url_video),
+		img: req.file
+	};
+
+    // Handler for undefined field
+    Object.keys(postData).forEach(key => postData[key] === undefined ? delete postData[key] : {});
     
+    // Write above thing to Post
+    var new_post = new Post(postData)
+    new_post.save()
 
+    // Input the created post IDs to User posts collection
+    User.findOneAndUpdate({username: req.session.username}, {$push: {posts: new_post._id}}, function(err, result){
+    })
 
+    // Send data back to AJAX to add it without page reload
+    postData.username = req.session.username
+    res.send(postData)
 })
 
 app.get('/error' , (req , res)=>{
@@ -139,10 +164,6 @@ app.get('/logout' , (req , res)=>{
     res.redirect('/login')
 
 })
-
-app.post('/upload', parser.single('image'), function (req, res) {
-    res.json(req.file);
-});
 
 const server = app.listen(3000, () => {
     console.log('http://localhost:3000')
