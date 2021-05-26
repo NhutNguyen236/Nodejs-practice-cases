@@ -6,16 +6,22 @@
                     <img src="http://via.placeholder.com/50x50" alt="">
                     <div class="usy-name">
                         <h3 id="username"></h3>
-                        <span><img src="images/clock.png" alt="">3 min ago</span>
+                        <span><img src="images/clock.png" alt="">Just a moment ago</span>
                     </div>
                 </div>
                 <div class="ed-opts">
                     <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
                     <ul class="ed-options">
-                        <li><a href="#" title="">Edit Post</a></li>
-                        <li><a href="#" title="">Delete Post</a></li>
+                        <li id="editPost"><a href="#" title="">Edit Post</a></li>
+                        <li id="delPost"><a href="#" title="">Delete Post</a></li>
                     </ul>
                 </div>
+                <script>
+                    $(".ed-opts-open").on("click", function(){
+                        $(this).next(".ed-options").toggleClass("active");
+                        return false;
+                    });
+                </script>
             </div>
             
             <div class="job_descp">

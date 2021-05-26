@@ -46,6 +46,9 @@ function doAjax() {
                     $('#url_video').html('<iframe width="500" height="300" src="https://www.youtube.com/embed/'+data.url_video+'" frameborder="0">')
                 }
                 
+                // Send username to editPost and delPost value
+                $('#editPost').html('<a href="#" title="" value="'+data.username+'">Edit Post</a>')
+                $('#delPost').html('<a href="#" title="" value="'+data.username+'">Edit Post</a>')
             })
         },
         error: (e) => {

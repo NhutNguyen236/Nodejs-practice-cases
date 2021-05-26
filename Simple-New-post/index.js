@@ -114,6 +114,7 @@ app.get('/index' , (req , res)=>{
             
             // Initialize record of posts
             var record = []
+            // Added sort here to sort by createdAt in decending order
             Post.find({_id: postIds}).sort({createdAt:-1}).then(function(posts){
                 record = posts
                 res.render('main/index', {record: record, req})
