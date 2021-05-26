@@ -158,6 +158,7 @@ app.post('/index', upload.single("postImage"), (req , res)=>{
 
     // Send data back to AJAX to add it without page reload
     postData.username = req.session.username
+    postData.postID = new_post._id
     res.send(postData)
 })
 
@@ -174,6 +175,28 @@ app.get('/logout' , (req , res)=>{
 
 })
 
+app.post('/deletePost', (req, res) => {
+    var body = req.body
+
+    Post.deleteOne({_id: body.post_id}, (err, data) => {
+        if(err) console.log(err)
+        else{
+            res.send(data)
+        }
+    })
+})
+
 const server = app.listen(3000, () => {
     console.log('http://localhost:3000')
+})
+
+app.post('/editPost', (req, res) => {
+    var body = req.body
+
+    Post.deleteOne({_id: body.post_id}, (err, data) => {
+        if(err) console.log(err)
+        else{
+            res.send(data)
+        }
+    })
 })

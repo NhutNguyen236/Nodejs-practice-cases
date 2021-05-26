@@ -23,8 +23,25 @@ $(window).on("load", function() {
         $(".wrapper").addClass("overlay");
         return false;
     });
+
     $(".post-project > a").on("click", function(){
         $(".post-popup.job_post").removeClass("active");
+        $(".wrapper").removeClass("overlay");
+        return false;
+    });
+
+    //////////// Nhut added Jquery for edit post effect /////////
+    // This is to make the edit box appear
+    $(".post-edit").on("click", function(){
+        //post-popup-edit post_edit
+        $(".post-popup-edit.job_post").addClass("active");
+        $(".wrapper").addClass("overlay");
+        return false;
+    });
+
+    // This is for x button to hide it away
+    $(".post-project-edit > a").on("click", function(){
+        $(".post-popup-edit.job_post").removeClass("active");
         $(".wrapper").removeClass("overlay");
         return false;
     });

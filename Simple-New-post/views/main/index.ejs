@@ -64,8 +64,7 @@
                                     <%if (locals.record.length >0){ %>
                                         <% record.forEach(function(row){ %>
                                             <div id="posts-section" class="posts-section">
-                                                
-                                                <div class="posty">
+                                                <div class="posty" post_id="<%= row._id%>">
                                                     <div class="post-bar no-margin">
                                                         <div class="post_topbar">
                                                             <div class="usy-dt">
@@ -78,8 +77,8 @@
                                                             <div class="ed-opts">
                                                                 <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
                                                                 <ul class="ed-options">
-                                                                    <li><a href="#" title="">Edit Post</a></li>
-                                                                    <li><a href="#" title="">Delete Post</a></li>
+                                                                    <li><a class="post-edit active" id="editLink" href="#" value="<%= row._id%>" title="">Edit Post</a></li>
+                                                                    <li><a id="delLink" href="#" value="<%= row._id%>" title="">Delete Post</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -165,6 +164,45 @@
 		<div class="post-popup job_post">
 			<div class="post-project">
 				<h3>Write your post 😇</h3>
+				<div class="post-project-fields">
+					<form id="postForm" method="POST" enctype="multipart/form-data">
+						<div class="row">
+							<div class="col-lg-12">
+								<input id="titleInput" type="text" name="title" placeholder="Title" required>
+							</div>
+							
+							<div class="col-lg-12">
+								<textarea id="descInput" name="description" placeholder="Description" required></textarea>
+							</div>
+
+                            <!-- For image upload -->
+                            <div class="col-lg-12">
+							    <input type="file" id="img" name="postImage" accept="image/*">
+							</div>
+
+                            <div class="col-lg-12">
+                                <input id="urlInput" type="url" name="url_video" id="url"
+                                placeholder="https://www.youtube.com/"
+                                pattern="https://www.youtube.com/.*" size="30">
+                            </div>
+                            
+							<div class="col-lg-12">
+								<ul>
+									<li><button id="postButton" class="submit" type="submit" value="post">Post</button></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div><!--post-project-fields end-->
+				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
+			</div><!--post-project end-->
+		</div><!--post-project-popup end-->
+
+        <!-- For edit post -->
+        <!-- Copy paste this in index -->
+		<div class="post-popup-edit job_post">
+			<div class="post-project-edit">
+				<h3>Edit your post 😇</h3>
 				<div class="post-project-fields">
 					<form id="postForm" method="POST" enctype="multipart/form-data">
 						<div class="row">

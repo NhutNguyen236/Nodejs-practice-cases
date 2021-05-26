@@ -1803,7 +1803,31 @@ main {
 	visibility: hidden;
 	z-index: 0;
 }
+
+/* Nhut added css to post-popup-edit  */
+.post-popup-edit {
+	width: 570px;
+	margin: 0 auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%) scale(0.65);
+	-moz-transform: translateX(-50%) translateY(-50%) scale(0.65);
+	-ms-transform: translateX(-50%) translateY(-50%) scale(0.65);
+	-o-transform: translateX(-50%) translateY(-50%) scale(0.65);
+	transform: translateX(-50%) translateY(-50%) scale(0.65);
+	opacity: 0;
+	visibility: hidden;
+	z-index: 0;
+}
 .post-popup.active {
+	opacity: 1;
+	visibility: visible;
+	z-index: 999;
+	-webkit-transform: scale(1) translateX(-50%) translateY(-50%);
+}
+/* Also added here to make it work */
+.post-popup-edit.active {
 	opacity: 1;
 	visibility: visible;
 	z-index: 999;
@@ -1820,6 +1844,20 @@ main {
 .post-project > a:hover {
 	color: #fff;
 }
+
+/* For post-project-edit a */
+.post-project-edit > a {
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	color: #fff;
+	font-size: 22px;
+	cursor: pointer;
+}
+.post-project-edit > a:hover {
+	color: #fff;
+}
+
 .post-project {
 	float: left;
 	width: 100%;
@@ -1829,6 +1867,18 @@ main {
 	float: left;
 	width: 100%;
 	background-color: #00b540;
+	color: #fff;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 500;
+	padding: 20px 0;
+}
+
+/* For Edit h3 too here */
+.post-project-edit h3 {
+	float: left;
+	width: 100%;
+	background-color: #1769ff;
 	color: #fff;
 	text-align: center;
 	font-size: 18px;
