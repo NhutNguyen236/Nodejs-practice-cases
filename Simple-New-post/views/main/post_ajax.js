@@ -62,12 +62,12 @@ function doAjax() {
                     $('#img').html('<img alt="" src="'+data.img.path+'">')
                 }
                 if(data.url_video !== undefined){
-                    $('#url_video').html('<iframe width="500" height="300" src="https://www.youtube.com/embed/'+data.url_video+'" frameborder="0">')
+                    $('#url_video').html('<iframe title="yb_video" width="500" height="300" src="https://www.youtube.com/embed/'+data.url_video+'" frameborder="0">')
                 }
                 
                 // Send postID to editPost and delPost value so they can identify which post to perform
-                $('#editPost').html('<a id="editLink" class="edit" href="#" title="" value="'+data.postID+'">Edit Post</a>')
-                $('#delPost').html('<a id="delLink"  href="#" title="" value="'+data.postID+'">Delete Post</a>')
+                $('#editPost').html('<a class="post-edit active" id="editLink" class="edit" href="#" title="" value="'+data.postID+'">Edit Post</a>')
+                $('#delPost').html('<a id="delLink" href="#" title="" value="'+data.postID+'">Delete Post</a>')
             }) 
         },
         error: (e) => {

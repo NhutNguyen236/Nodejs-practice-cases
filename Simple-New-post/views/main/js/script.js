@@ -224,6 +224,11 @@ $(window).on("load", function() {
         return false;
     });
 
+    //Nhut add toggle effect for dropdown list added by AJAX
+    $(document).on('click','.ed-opts-open',function(){
+        $(this).next(".ed-options").toggleClass("active");
+        return false;
+    })
 
     // ============== Menu Script =============
 
