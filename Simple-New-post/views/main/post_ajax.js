@@ -38,37 +38,39 @@ function doAjax() {
         success: (data) => {      
             console.log(data)
             // The data got a vague reality that sometimes we dont have video_url or img or both
-            $('#newPost').load('/load_ajax/post.ejs', function(){
-                //////////////////////// This algorithm needs to be fixed /////////////////////////////
-                // Object.keys(data).forEach((prop)=>{
-                //     if(prop == 'img'){
-                //         $('#img').html('<img alt="" src="'+data[img].path+'">')
-                //     }
-                //     else if(prop == 'url_video'){
-                //         $('#url_video').html('<iframe width="500" height="300" src="https://www.youtube.com/embed/'+data[url_video]+'" frameborder="0">')
-                //     }
-                //     $('#'+prop).text(data[prop])
-                // })
-                //////////////////////////////////////////////////////////////////////////////////////
-                
-                $('#username').text(data.username)
-                $('#title').text(data.title)
-                $('#description').text(data.description)
-
-                // Bind post_id to div posty of each new post - AJAX add only
-                $('#posty_ajax').attr("post_id", data.postID)
-
-                if(data.img !== undefined){
-                    $('#img').html('<img alt="" src="'+data.img.path+'">')
-                }
-                if(data.url_video !== undefined){
-                    $('#url_video').html('<iframe title="yb_video" width="500" height="300" src="https://www.youtube.com/embed/'+data.url_video+'" frameborder="0">')
-                }
-                
-                // Send postID to editPost and delPost value so they can identify which post to perform
-                $('#editPost').html('<a class="post-edit active" id="editLink" class="edit" href="#" title="" value="'+data.postID+'">Edit Post</a>')
-                $('#delPost').html('<a id="delLink" href="#" title="" value="'+data.postID+'">Delete Post</a>')
-            }) 
+            $('#newPost').prepend(
+                $('<div></div>').load('/load_ajax/post.ejs', function(){
+                    //////////////////////// This algorithm needs to be fixed /////////////////////////////
+                    // Object.keys(data).forEach((prop)=>{
+                    //     if(prop == 'img'){
+                    //         $('#img').html('<img alt="" src="'+data[img].path+'">')
+                    //     }
+                    //     else if(prop == 'url_video'){
+                    //         $('#url_video').html('<iframe width="500" height="300" src="https://www.youtube.com/embed/'+data[url_video]+'" frameborder="0">')
+                    //     }
+                    //     $('#'+prop).text(data[prop])
+                    // })
+                    //////////////////////////////////////////////////////////////////////////////////////
+                    
+                    $(this).find('#username').text(data.username)
+                    $(this).find('#title').text(data.title)
+                    $(this).find('#description ').text(data.description)
+    
+                    // Bind post_id to div posty of each new post - AJAX add only
+                    $(this).find('#posty_ajax').attr("post_id", data.postID)
+    
+                    if(data.img !== undefined){
+                        $(this).find('#img').html('<img alt="" src="'+data.img.path+'">')
+                    }
+                    if(data.url_video !== undefined){
+                        $(this).find('#url_video').html('<iframe title="yb_video" width="500" height="300" src="https://www.youtube.com/embed/'+data.url_video+'" frameborder="0">')
+                    }
+                    
+                    // Send postID to editPost and delPost value so they can identify which post to perform
+                    $(this).find('#editPost').html('<a class="post-edit active" id="editLink" class="edit" href="#" title="" value="'+data.postID+'">Edit Post</a>')
+                    $(this).find('#delPost').html('<a id="delLink" href="#" title="" value="'+data.postID+'">Delete Post</a>')
+                }) 
+            )
         },
         error: (e) => {
             $("#confirmMsg").text(e.responseText);
