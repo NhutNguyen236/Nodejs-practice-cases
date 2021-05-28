@@ -32,7 +32,7 @@ $(window).on("load", function() {
 
     //////////// Nhut added Jquery for edit post effect /////////
     // This is to make the edit box appear
-    $(".post-edit").on("click", function(){
+    $(document).on("click", ".post-edit", function(){
         //post-popup-edit post_edit
         $(".post-popup-edit.job_post").addClass("active");
         $(".wrapper").addClass("overlay");
