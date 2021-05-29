@@ -5,20 +5,20 @@ $(document).ready( () => {
         doAjax();
     });
 
-    // When user clicks on delete button added by AJAX
-    $(document).on('click','#delLink',function(){
-        delPost();
-    })
+    // // When user clicks on delete button added by AJAX
+    // $(document).on('click','#delLink',function(){
+    //     delPost();
+    // })
 
-    // When user clicks on edit button added by AJAX
-    $(document).on('click','#editLink',function(){
-        // Edit post is a bit different from delete post since it needs
-        /**
-         * Input - Post editor
-         * The infor of the chosen post
-         */
-        editPost();
-    })
+    // // When user clicks on edit button added by AJAX
+    // $(document).on('click','a#editLink',function(){
+    //     // Edit post is a bit different from delete post since it needs
+    //     /**
+    //      * Input - Post editor
+    //      * The infor of the chosen post
+    //      */
+    //     editPost();
+    // })
  
 });
 
@@ -78,9 +78,10 @@ function doAjax() {
     });
 }
 
-function delPost() {
+/////////////////////////////////// Remove posts by AJAX /////////////////////////////////////
+$(document).on("click", "#delLink", function(){
     // a tag has no attr value so we should use attr() here to read it out
-    var post_id = $('#delLink').attr("value")
+    var post_id = $(this).parent().find('#delLink').attr("value")
 
     $.ajax({
         type: "POST",
@@ -99,33 +100,29 @@ function delPost() {
             console.log('Server error')
         }
     });
-}
+})
 
-function delPost() {
-    // a tag has no attr value so we should use attr() here to read it out
-    var post_id = $('#delLink').attr("value")
+//////////////////////////////////////// Edit Post by AJAX ///////////////////////////
+$(document).on("click", "#editLink", function(){
+    var post_id = $(this).parent().find('#editLink').attr("value")
 
     $.ajax({
         type: "POST",
-        url:'/deletePost',
+        url:'/editPost',
         data: {post_id: post_id},
-        success:function(response){
-            if(response){
+        success:function(data){
+            if(data){
+                
                 // Remove the whole div contains new post 
-                $('div[post_id="'+post_id+'"]').remove()
+                $('#titleEdit').attr("value", data.title)
+                $('#descEdit').val(data.description)
+                $('#urlEdit').attr("value", "https://www.youtube.com/watch?v=" + data.url_video)
             }else{
                 console.log('data cannot be deleted');
             }
         },
-        error:function(response){
+        error:function(data){
             console.log('Server error')
         }
     });
-}
-
-function editPost() {
-    // a tag has no attr value so we should use attr() here to read it out
-    var post_id = $('#editLink').attr("value")
-
-    
-}
+})

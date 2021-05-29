@@ -191,12 +191,9 @@ const server = app.listen(3000, () => {
 })
 
 app.post('/editPost', (req, res) => {
-    var body = req.body
+    var post_id = req.body.post_id
 
-    Post.deleteOne({_id: body.post_id}, (err, data) => {
-        if(err) console.log(err)
-        else{
-            res.send(data)
-        }
+    Post.findOne({_id: post_id}).then(function(data){
+        res.send(data)
     })
 })

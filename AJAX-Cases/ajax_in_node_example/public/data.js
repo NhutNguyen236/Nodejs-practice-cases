@@ -27,8 +27,9 @@ $(document).ready(function(){
        });
     });
     // For delete function
-    $(document).on('click','button.del',function(){
-        var id = $(this).parent().find('button.del').val();
+    $(document).on('click','#del',function(){
+        console.log($(this))
+        var id = $(this).parent().find('#del').attr("value");
         // alert('delte',id)
         $.ajax({
             url:'/task/removetask',
@@ -85,7 +86,7 @@ $(document).ready(function(){
                      $.each(response.data,function(index,data){
                          var url = url+data._id;
                          index+=1;
-                         $('tbody').append("<tr class='taskrow'><td>"+ index +"</td><td>"+data.task+"</td><td>"+"<button class='del' value='"+data._id+"'>delete</button>"+"</td><td>"+"<button class='edit' value='"+data._id+"'>edit</button>"+"</td></tr>");   
+                         $('tbody').append("<tr class='taskrow'><td>"+ index +"</td><td>"+data.task+"</td><td>"+"<button id='del' value='"+data._id+"'>delete</button>"+"</td><td>"+"<button class='edit' value='"+data._id+"'>edit</button>"+"</td></tr>");   
                      });
                  }
                }

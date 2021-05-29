@@ -203,14 +203,14 @@
 			<div class="post-project-edit">
 				<h3>Edit your post 😇</h3>
 				<div class="post-project-fields">
-					<form id="postForm" method="POST" enctype="multipart/form-data">
+					<form id="editForm" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-lg-12">
-								<input id="titleInput" type="text" name="title" placeholder="Title" required>
+								<input id="titleEdit" type="text" name="title" placeholder="Title" required>
 							</div>
 							
 							<div class="col-lg-12">
-								<textarea id="descInput" name="description" placeholder="Description" required></textarea>
+								<textarea id="descEdit" name="description" placeholder="Description" required></textarea>
 							</div>
 
                             <!-- For image upload -->
@@ -219,7 +219,7 @@
 							</div>
 
                             <div class="col-lg-12">
-                                <input id="urlInput" type="url" name="url_video" id="url"
+                                <input id="urlEdit" type="url" name="url_video" id="url"
                                 placeholder="https://www.youtube.com/"
                                 pattern="https://www.youtube.com/.*" size="30">
                             </div>
