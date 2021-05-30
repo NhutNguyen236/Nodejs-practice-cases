@@ -4,21 +4,6 @@ $(document).ready( () => {
         event.preventDefault();
         doAjax();
     });
-
-    // // When user clicks on delete button added by AJAX
-    // $(document).on('click','#delLink',function(){
-    //     delPost();
-    // })
-
-    // // When user clicks on edit button added by AJAX
-    // $(document).on('click','a#editLink',function(){
-    //     // Edit post is a bit different from delete post since it needs
-    //     /**
-    //      * Input - Post editor
-    //      * The infor of the chosen post
-    //      */
-    //     editPost();
-    // })
  
 });
 
@@ -26,6 +11,8 @@ $(document).ready( () => {
 function doAjax() {
 	var form = $('#postForm')[0];
 	var data = new FormData(form);
+
+    console.log(data.get('title'))
 	
     $.ajax({
         type: "POST",
@@ -125,4 +112,26 @@ $(document).on("click", "#editLink", function(){
             console.log('Server error')
         }
     });
+    
+})
+
+$('#editForm').ready(function(){
+    $('#editForm').on("click", "#editButton", function(e){
+        e.preventDefault();
+
+        var form = $('#editForm')[0];
+	    var data = new FormData(form);
+
+        console.log(data.get('title'))
+        console.log(data.get('description'))
+
+        post_infor = {title: data.get('title'), desc: data.get('description')}
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url:'/submitEdit',
+            data: post_infor
+        });
+    })
 })

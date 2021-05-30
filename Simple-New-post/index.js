@@ -132,6 +132,8 @@ app.get('/index' , (req , res)=>{
 var idGetter = require('./functions/youtubeID')
 app.post('/index', upload.single("postImage"), (req , res)=>{
     // Get post body
+
+    console.log(req.body)
     var postData = {
 		title: req.body.title,
 		description: req.body.description,
@@ -186,14 +188,23 @@ app.post('/deletePost', (req, res) => {
     })
 })
 
-const server = app.listen(3000, () => {
-    console.log('http://localhost:3000')
-})
-
 app.post('/editPost', (req, res) => {
     var post_id = req.body.post_id
+    console
 
     Post.findOne({_id: post_id}).then(function(data){
         res.send(data)
     })
 })
+
+app.post('/submitEdit' , (req , res)=>{
+
+    console.log(req.body.title)
+
+})
+////////////////////////////////// SERVER LISTENER ////////////////////
+
+const server = app.listen(3000, () => {
+    console.log('http://localhost:3000')
+})
+
