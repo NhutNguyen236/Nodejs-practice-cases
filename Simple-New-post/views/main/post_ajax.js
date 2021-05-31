@@ -11,8 +11,6 @@ $(document).ready( () => {
 function doAjax() {
 	var form = $('#postForm')[0];
 	var data = new FormData(form);
-
-    console.log(data.get('title'))
 	
     $.ajax({
         type: "POST",
@@ -56,6 +54,8 @@ function doAjax() {
                     // Send postID to editPost and delPost value so they can identify which post to perform
                     $(this).find('#editPost').html('<a class="post-edit active" id="editLink" class="edit" href="#" title="" value="'+data.postID+'">Edit Post</a>')
                     $(this).find('#delPost').html('<a id="delLink" href="#" title="" value="'+data.postID+'">Delete Post</a>')
+
+
                 }) 
             )
         },
@@ -90,8 +90,9 @@ $(document).on("click", "#delLink", function(){
 })
 
 //////////////////////////////////////// Edit Post by AJAX ///////////////////////////
+var post_id = undefined
 $(document).on("click", "#editLink", function(){
-    var post_id = $(this).parent().find('#editLink').attr("value")
+    post_id = $(this).parent().find('#editLink').attr("value")
 
     $.ajax({
         type: "POST",
@@ -119,19 +120,36 @@ $('#editForm').ready(function(){
     $('#editForm').on("click", "#editButton", function(e){
         e.preventDefault();
 
+        console.log(post_id)
         var form = $('#editForm')[0];
-	    var data = new FormData(form);
+        var data = new FormData(form);
 
-        console.log(data.get('title'))
-        console.log(data.get('description'))
-
-        post_infor = {title: data.get('title'), desc: data.get('description')}
+        data.append("post_id", post_id)
 
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
-            url:'/submitEdit',
-            data: post_infor
+            url: "/submitEdit",
+            data: data,
+            processData: false, //prevent jQuery from automatically transforming the data into a query string
+            contentType: false,
+            cache: false,
+            success: (data) => {      
+                console.log(data)
+                // Show changed data to the UI 
+                $("div.posty[post_id=''+post_id+'']").ready(function(){
+                    $(this).children().find('.job_descp > h3').text(data.title)
+                    $(this).children().find('.job_descp > p').text(data.description)
+                    $(this).children().find('.job_descp > img').attr("src", data.img)
+                    // This one too
+                    if(data.url_video !== undefined){
+                        $(this).children().find('#url_video > iframe').attr("src", "https://www.youtube.com/watch?v=" + data.url_video)
+                    }
+                })
+            },
+            error: (e) => {
+                $("#confirmMsg").text(e.responseText);
+            }
         });
     })
 })

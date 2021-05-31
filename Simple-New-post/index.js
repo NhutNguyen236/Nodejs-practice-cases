@@ -115,7 +115,7 @@ app.get('/index' , (req , res)=>{
             // Initialize record of posts
             var record = []
             // Added sort here to sort by createdAt in decending order
-            Post.find({_id: postIds}).sort({createdAt:-1}).then(function(posts){
+            Post.find({_id: postIds}).sort({updatedAt:-1}).then(function(posts){
                 record = posts
                 res.render('main/index', {record: record, req})
             })
@@ -132,8 +132,6 @@ app.get('/index' , (req , res)=>{
 var idGetter = require('./functions/youtubeID')
 app.post('/index', upload.single("postImage"), (req , res)=>{
     // Get post body
-
-    console.log(req.body)
     var postData = {
 		title: req.body.title,
 		description: req.body.description,
@@ -197,10 +195,48 @@ app.post('/editPost', (req, res) => {
     })
 })
 
-app.post('/submitEdit' , (req , res)=>{
+// Call Youtube video IDs getter
+var idGetter = require('./functions/youtubeID')
+app.post('/submitEdit', upload.single("postImage"), (req , res)=>{
+    // Get post body
 
-    console.log(req.body.title)
+    var postData = {
+        post_id: req.body.post_id,
+		title: req.body.title,
+		description: req.body.description,
+        url_video: idGetter.ybgetID(req.body.url_video),
+		img: req.file
+	};
 
+    // Store post_id 
+    var post_id = postData.post_id
+    // Using instant Post schema will not help because it will auto generate a new _id which will replace the original one
+    // If url_video is undefined
+    if(postData.url_video === undefined){
+        delete postData.url_video
+    }
+    // If image is undefined 
+    if(postData.img === undefined){
+        delete postData.img
+    }
+    // If image is not undefined
+    if(postData.img !== undefined){
+        postData.img = postData.img.path
+    }
+
+    // Remove post_id from postData
+    delete postData.post_id
+
+    console.log(postData)
+
+    // Update post with above infor
+    Post.findOneAndUpdate({_id: post_id}, postData, (err, data) => {
+
+    })
+
+    // Send data back to AJAX to add it without page reload
+    postData.username = req.session.username
+    res.send(postData)
 })
 ////////////////////////////////// SERVER LISTENER ////////////////////
 
