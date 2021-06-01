@@ -21,7 +21,6 @@ function doAjax() {
         contentType: false,
         cache: false,
         success: (data) => {      
-            console.log(data)
             // The data got a vague reality that sometimes we dont have video_url or img or both
             $('#newPost').prepend(
                 $('<div></div>').load('/load_ajax/post.ejs', function(){
@@ -78,7 +77,6 @@ $(document).on("click", "#delLink", function(){
             if(response){
                 // Remove the whole div contains new post 
                 $('div[post_id="'+post_id+'"]').remove()
-                console.log('Post deleted')
             }else{
                 console.log('data cannot be deleted');
             }
@@ -134,6 +132,7 @@ $('#editForm').ready(function(){
             cache: false,
             success: (data) => {      
                 $(document).ready(function(){
+                    // Change title and description from posts 
                     $('.posty[post_id="'+post_id+'"]').find('.job_descp > h3').text(data.title)
                     $('.posty[post_id="'+post_id+'"]').find('.job_descp > p').text(data.description)
                     // post update for posts loaded by ejs
@@ -143,22 +142,23 @@ $('#editForm').ready(function(){
                         $('.posty[post_id="'+post_id+'"]').find('.job_descp > img').removeAttr("style")
                         $('.posty[post_id="'+post_id+'"]').find('.job_descp > img').attr("src", data.img)
                     }
-                    // post update for posts loaded by ejs
-                    else{
-                        // find <div id="img"></div> to add img tag in when data.img is not undefined
-                        if(data.img !== undefined){
-                            $('div#img').html('<img alt="" src="'+data.img+'">')
-                        }
-                        
-                    }
+                
                     // This is to check if iframe is there or not, this is for post by ejs
                     if($('.posty[post_id="'+post_id+'"]').find('.job_descp > iframe').ready() && data.url_video !== undefined){
                         // Remove style of the current post without img, it will skip if there is no attr named style, kinda tidy
                         $('.posty[post_id="'+post_id+'"]').find('.job_descp > iframe').removeAttr("style")
                         $('.posty[post_id="'+post_id+'"]').find('.job_descp > iframe').attr("src", "https://www.youtube.com/embed/" + data.url_video)
                     }
-
                     
+                    // update img for posts posted by ajax
+                    if(data.img !== undefined){
+                        $('div[id=posty_ajax][post_id='+post_id+'] div[class=job_descp] div[id=img]').html('<img alt="" src="'+data.img+'"/>')
+                    }
+
+                    // update video link for posts posted by ajax
+                    if(data.url_video !== undefined){
+                        $('div[id=posty_ajax][post_id='+post_id+'] div[class=job_descp] div[id=url_video]').html('<iframe title="yb_video" width="500" height="300" src="https://www.youtube.com/embed/'+data.url_video+'" frameborder="0">')
+                    }
                 })
             },
             error: (e) => {
