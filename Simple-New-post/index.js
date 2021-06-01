@@ -195,8 +195,6 @@ app.post('/editPost', (req, res) => {
     })
 })
 
-// Call Youtube video IDs getter
-var idGetter = require('./functions/youtubeID')
 app.post('/submitEdit', upload.single("postImage"), (req , res)=>{
     // Get post body
 

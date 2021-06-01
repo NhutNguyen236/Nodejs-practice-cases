@@ -119,8 +119,6 @@ $(document).on("click", "#editLink", function(){
 $('#editForm').ready(function(){
     $('#editForm').on("click", "#editButton", function(e){
         e.preventDefault();
-
-        console.log(post_id)
         var form = $('#editForm')[0];
         var data = new FormData(form);
 
@@ -135,16 +133,32 @@ $('#editForm').ready(function(){
             contentType: false,
             cache: false,
             success: (data) => {      
-                console.log(data)
-                // Show changed data to the UI 
-                $("div.posty[post_id=''+post_id+'']").ready(function(){
-                    $(this).children().find('.job_descp > h3').text(data.title)
-                    $(this).children().find('.job_descp > p').text(data.description)
-                    $(this).children().find('.job_descp > img').attr("src", data.img)
-                    // This one too
-                    if(data.url_video !== undefined){
-                        $(this).children().find('#url_video > iframe').attr("src", "https://www.youtube.com/watch?v=" + data.url_video)
+                $(document).ready(function(){
+                    $('.posty[post_id="'+post_id+'"]').find('.job_descp > h3').text(data.title)
+                    $('.posty[post_id="'+post_id+'"]').find('.job_descp > p').text(data.description)
+                    // post update for posts loaded by ejs
+                    // This is to check if img is there or not, this is for post by ejs
+                    if($('.posty[post_id="'+post_id+'"]').find('.job_descp > img').ready() && data.img !== undefined){
+                        // Remove style of the current post without img, it will skip if there is no attr named style, kinda tidy
+                        $('.posty[post_id="'+post_id+'"]').find('.job_descp > img').removeAttr("style")
+                        $('.posty[post_id="'+post_id+'"]').find('.job_descp > img').attr("src", data.img)
                     }
+                    // post update for posts loaded by ejs
+                    else{
+                        // find <div id="img"></div> to add img tag in when data.img is not undefined
+                        if(data.img !== undefined){
+                            $('div#img').html('<img alt="" src="'+data.img+'">')
+                        }
+                        
+                    }
+                    // This is to check if iframe is there or not, this is for post by ejs
+                    if($('.posty[post_id="'+post_id+'"]').find('.job_descp > iframe').ready() && data.url_video !== undefined){
+                        // Remove style of the current post without img, it will skip if there is no attr named style, kinda tidy
+                        $('.posty[post_id="'+post_id+'"]').find('.job_descp > iframe').removeAttr("style")
+                        $('.posty[post_id="'+post_id+'"]').find('.job_descp > iframe').attr("src", "https://www.youtube.com/embed/" + data.url_video)
+                    }
+
+                    
                 })
             },
             error: (e) => {
