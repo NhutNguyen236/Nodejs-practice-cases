@@ -360,7 +360,7 @@ header {
 	position: relative;
 }
 .search-bar form input {
-	width: 100%;
+	width: 170%;
 	background-color: #fff;
 	height: 38px;
 	color: #b2b2b2;
@@ -5505,4 +5505,9 @@ a:hover {
 }
 .tt-suggestion p {
 	margin: 0;
+}
+
+.tt-dropdown-menu {
+    max-height: 150px;
+    overflow-y: auto;
 }
