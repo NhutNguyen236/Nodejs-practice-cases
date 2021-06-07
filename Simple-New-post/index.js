@@ -61,8 +61,7 @@ const upload = multer({ storage: storage });
 require('./config/db')
 var User = require('./models/user')
 var Post = require('./models/post')
-
-
+var Comment = require('./models/comment')
 
 //////////////////////////////// ROUTES /////////////////////////////////////
 app.get('/' , (req , res)=>{
@@ -235,6 +234,15 @@ app.post('/submitEdit', upload.single("postImage"), (req , res)=>{
     // Send data back to AJAX to add it without page reload
     postData.username = req.session.username
     res.send(postData)
+})
+
+app.post('/comment', (req, res) => {
+    var postData = {
+        post_id: req.body.post_id,
+        content: req.body.comment
+	};
+
+    console.log(postData)
 })
 ////////////////////////////////// SERVER LISTENER ////////////////////
 

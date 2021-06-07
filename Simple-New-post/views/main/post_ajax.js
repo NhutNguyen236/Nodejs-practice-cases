@@ -117,6 +117,7 @@ $(document).on("click", "#editLink", function(){
 $('#editForm').ready(function(){
     $('#editForm').on("click", "#editButton", function(e){
         e.preventDefault();
+
         var form = $('#editForm')[0];
         var data = new FormData(form);
 
@@ -166,4 +167,28 @@ $('#editForm').ready(function(){
             }
         });
     })
+})
+
+
+//================================= Comment posting ================================
+$(document).on("click", "#cmtButton", function(e){
+    e.preventDefault()
+    
+    post_id = $(this).parent().find('#cmtButton').attr("post_id")
+
+    var form = $('#cmtForm')[0];
+    var data = new FormData(form);
+
+    data.append("post_id", post_id)
+
+    console.log(data.get("comment"))
+    console.log(data.get("post_id"))
+
+    $.ajax({
+        type: "POST",
+        url: "/comment",
+        data: data,
+        processData: false
+    });
+
 })

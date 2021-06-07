@@ -6,6 +6,11 @@ postSchema = new Schema( {
     description: String,
     img:String,
     url_video:String,
+    comments: [
+        {
+            type: String,
+        }
+    ]
     
 }, {collection: 'post', timestamps: true}),
 
