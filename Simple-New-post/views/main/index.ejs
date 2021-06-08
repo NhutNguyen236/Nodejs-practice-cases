@@ -131,9 +131,9 @@
                                                                     <img src="http://via.placeholder.com/40x40" alt="">
                                                                 </div>
                                                                 <div class="comment_box">
-                                                                    <form id="cmtForm" method="POST">
+                                                                    <form id="cmtForm" method="POST" post_id="<%= row._id%>">
                                                                         <input type="text" placeholder="Post your comment" name="comment">
-                                                                        <button id="cmtButton" type="submit" post_id="<%= row._id%>">Send</button>
+                                                                        <button class="submit" id="cmtButton" type="submit" post_id="<%= row._id%>">Send</button>
                                                                     </form>
                                                                 </div>
                                                             </div><!--post-comment end-->

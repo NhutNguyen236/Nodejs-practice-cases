@@ -171,24 +171,27 @@ $('#editForm').ready(function(){
 
 
 //================================= Comment posting ================================
-$(document).on("click", "#cmtButton", function(e){
-    e.preventDefault()
+$('#cmtForm[post_id="'+post_id+'"]').ready(function(){
+    $(this).on('click', '#cmtButton', function(e){
+        
+        post_id = $(this).parent().find('#cmtButton').attr("post_id")
     
-    post_id = $(this).parent().find('#cmtButton').attr("post_id")
+        var form = $('#cmtForm[post_id="'+post_id+'"]')[0];
+        var data = new FormData(form);
+    
+        data.append("post_id", post_id)
+    
+        console.log(data.get("comment"))  
+        console.log(data.get("post_id"))
 
-    var form = $('#cmtForm')[0];
-    var data = new FormData(form);
+        $.ajax({
+            type: "POST",
+            url: "/comment",
+            processData: false,
+            contentType: false,
+            data: data
+        })
 
-    data.append("post_id", post_id)
-
-    console.log(data.get("comment"))
-    console.log(data.get("post_id"))
-
-    $.ajax({
-        type: "POST",
-        url: "/comment",
-        data: data,
-        processData: false
-    });
-
-})
+        e.preventDefault()
+    })
+})  

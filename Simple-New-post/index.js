@@ -239,7 +239,7 @@ app.post('/submitEdit', upload.single("postImage"), (req , res)=>{
 app.post('/comment', (req, res) => {
     var postData = {
         post_id: req.body.post_id,
-        content: req.body.comment
+        content: req.body.comment 
 	};
 
     console.log(postData)
