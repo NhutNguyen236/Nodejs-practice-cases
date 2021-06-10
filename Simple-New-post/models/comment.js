@@ -2,9 +2,9 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 comentSchema = new Schema( {
-    commentId: String,
     content:String,
     displayname: String,
+    userImage: String
 }, {collection: 'comment', timestamps: true}),
 
 // model is very important, point to the right database(model) name to get access correctly

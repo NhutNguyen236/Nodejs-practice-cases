@@ -102,7 +102,7 @@ app.post('/login' , (req , res)=>{
 })
 
 // Index page route
-app.get('/index' , (req , res)=>{
+app.get('/index' , async function(req , res){
     // Check if session is set
     if(req.session.username){
         //Get record of post from username
@@ -116,7 +116,31 @@ app.get('/index' , (req , res)=>{
             // Added sort here to sort by createdAt in decending order
             Post.find({_id: postIds}).sort({updatedAt:-1}).then(function(posts){
                 record = posts
-                res.render('main/index', {record: record, req})
+                
+                // for(let i = 0; i  < record.length; i++){
+                //     for(let j = 0; j < record[i].comments.length; j++){
+
+                        
+
+                //     }
+                // }
+
+                async function getComment(){
+
+                    for(let i = 0; i < record.length; i++){
+                        for(let j = 0; j < record[i].comments.length; j++){
+                            let comment = await Comment.findOne({_id: record[i].comments[j]}).exec()
+
+                            record[i].comments[j] = comment
+
+                        }
+                    }
+
+                    res.render('main/index', {record: record, req})
+                }
+
+                getComment()
+
             })
         })
         
@@ -241,6 +265,19 @@ app.post('/comment', (req, res) => {
         post_id: req.body.post_id,
         content: req.body.comment 
 	};
+
+    // Add new comment to comment collection
+    var new_comment = new Comment({
+        content: postData.content,
+        displayname: req.session.username
+    })
+
+    new_comment.save()
+
+    // Add comment id to post collection 
+    Post.findOneAndUpdate({_id: postData.post_id}, {$push: {comments: new_comment._id}}, function(){
+
+    })  
 
     console.log(postData)
 })

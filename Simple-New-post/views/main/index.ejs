@@ -105,23 +105,20 @@
 
                                                         <!-- Comment section -->
                                                         <div class="comment-section">
-                                                            <div class="plus-ic">
-                                                                <i class="la la-plus"></i>
-                                                            </div>
                                                             <div class="comment-sec">
                                                                 <ul>
                                                                     <li>
-                                                                        <div class="comment-list">
-                                                                            <div class="bg-img">
-                                                                                <img src="http://via.placeholder.com/40x40" alt="">
-                                                                            </div>
-                                                                            <div class="comment">
-                                                                                <h3>John Doe</h3>
-                                                                                <span><img src="images/clock.png" alt=""> 3 min ago</span>
-                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
-                                                                            </div>
-                                                                        </div><!--comment-list end-->
-                                                                        
+                                                                        <% row.comments.forEach(function(comment){ %>
+                                                                            <div class="comment-list">
+                                                                                <div class="bg-img">
+                                                                                    <img src="http://via.placeholder.com/40x40" alt="">
+                                                                                </div>
+                                                                                <div class="comment">
+                                                                                    <h3><%= comment.displayname%></h3>
+                                                                                    <p><%= comment.content%></p>
+                                                                                </div>
+                                                                            </div><!--comment-list end-->
+                                                                        <% }) %>
                                                                     </li>
                                                                 </ul>
                                                             </div><!--comment-sec end-->

@@ -180,16 +180,11 @@ $('#cmtForm[post_id="'+post_id+'"]').ready(function(){
         var data = new FormData(form);
     
         data.append("post_id", post_id)
-    
-        console.log(data.get("comment"))  
-        console.log(data.get("post_id"))
 
         $.ajax({
             type: "POST",
             url: "/comment",
-            processData: false,
-            contentType: false,
-            data: data
+            data: {post_id: data.get("post_id"), comment: data.get("comment")}
         })
 
         e.preventDefault()
