@@ -109,15 +109,17 @@
                                                                 <ul>
                                                                     <li>
                                                                         <% row.comments.forEach(function(comment){ %>
-                                                                            <div class="comment-list">
-                                                                                <div class="bg-img">
-                                                                                    <img src="http://via.placeholder.com/40x40" alt="">
-                                                                                </div>
-                                                                                <div class="comment">
-                                                                                    <h3><%= comment.displayname%></h3>
-                                                                                    <p><%= comment.content%></p>
-                                                                                </div>
-                                                                            </div><!--comment-list end-->
+                                                                            <% if(comment != null){ %>
+                                                                                <div class="comment-list">
+                                                                                    <div class="bg-img">
+                                                                                        <img src="http://via.placeholder.com/40x40" alt="">
+                                                                                    </div>
+                                                                                    <div class="comment">
+                                                                                        <h3><%= comment.displayname%></h3>
+                                                                                        <p><%= comment.content%></p>
+                                                                                    </div>
+                                                                                </div><!--comment-list end-->
+                                                                            <% } %>
                                                                         <% }) %>
                                                                     </li>
                                                                 </ul>
